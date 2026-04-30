@@ -4,21 +4,14 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Controller, useForm } from "react-hook-form"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { Input } from "@/components/ui/input"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-} from "@/components/ui/input-group"
 import * as z from "zod"
-import { useRouter } from 'next/navigation'
+
 import { useState } from 'react'
 import { authClient } from '@/lib/auth-client'
 import { Alert, AlertTitle } from '@/components/ui/alert'
@@ -26,6 +19,7 @@ import { OctagonAlertIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { Spinner } from '@/components/ui/spinner'
+import { useRouter } from 'next/navigation'
 const formSchema = z.object({
   email: z.email(),
   password: z.string().min(1, {
@@ -34,9 +28,7 @@ const formSchema = z.object({
 })
 
 export const SignInView = () => {
-
   const router = useRouter()
-
   const [pending, setPending] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -60,8 +52,9 @@ export const SignInView = () => {
       },
       {
         onSuccess: () => {
-          setPending(false)
           router.push("/")
+          setPending(false)
+
         },
         onError: ({ error }) => {
           setPending(false)
