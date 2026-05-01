@@ -23,18 +23,16 @@ export default function RootLayout({
 }>) {
   return (
 
-    <NuqsAdapter>
-      <TRPCReactProvider>
-        <html lang="en">
-          <body
-            className={`${inter.className} antialiased`}
-          >
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>
+        <NuqsAdapter>
+          <TRPCReactProvider>
             <Toaster />
             {children}
-          </body>
-        </html>
-      </TRPCReactProvider>
-    </NuqsAdapter>
+          </TRPCReactProvider>
+        </NuqsAdapter>
+      </body>
+    </html>
 
   );
 }
