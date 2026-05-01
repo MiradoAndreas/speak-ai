@@ -35,7 +35,7 @@ export const AgentForm = ({
         toast.success("Agent created successfullys")
         onSuccess?.()
         await queryClient.invalidateQueries(
-          trpc.agents.getMany.queryOptions()
+          trpc.agents.getMany.queryOptions({})
         )
 
         if (initialValues?.id) {
