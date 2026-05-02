@@ -11,21 +11,19 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
-  TableHeader,
   TableRow,
 } from "@/components/ui/table"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data: TData[],
   onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  onRowClick
+  onRowClick,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -34,9 +32,8 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="overflow-hidden bg-background rounded-lg border">
+    <div className="rounded-lg border bg-background overflow-hidden">
       <Table>
-
         <TableBody>
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
@@ -55,7 +52,7 @@ export function DataTable<TData, TValue>({
             ))
           ) : (
             <TableRow>
-              <TableCell colSpan={columns.length} className="h-19 text-muted-foreground text-center">
+              <TableCell colSpan={columns.length} className="h-19 text-center text-muted-foreground">
                 No results.
               </TableCell>
             </TableRow>

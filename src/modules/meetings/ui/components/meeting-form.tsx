@@ -151,7 +151,7 @@ export const MeetingsForm = ({
                 value: agent.id,
                 children: (
                   <div className="flex items-center gap-x-2">
-                    <GeneratedAvatar seed={agent.name} variant="botttsNeutral" className="border size-16" />
+                    <GeneratedAvatar seed={agent.name} variant="botttsNeutral" className="border size-8" />
                     <span>{agent.name}</span>
                   </div>
                 )
