@@ -3,12 +3,16 @@ import { ErrorState } from "@/components/error-state"
 import { LoadingState } from "@/components/loading-state"
 import { useConfirm } from "@/hooks/use-confirm"
 import { MeetingIdViewHeader } from "@/modules/meetings/ui/components/meeting-id-view-header"
+import { UpcomingState } from "@/modules/meetings/ui/components/upcoming-state"
 import { UpdateMeetingDialog } from "@/modules/meetings/ui/components/update-meeting-dialog"
 import { useTRPC } from "@/trpc/client"
 import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { toast } from "sonner"
+import { ActiveState } from "../components/active-state"
+import { CancelledState } from "../components/cancelled-state"
+import { ProcessingState } from "../components/processing-state"
+
 
 interface Props {
   meetingId: string
@@ -49,6 +53,13 @@ export const MeetingIdView = ({ meetingId }: Props) => {
     })
   }
 
+  const isActive = data.status === "active"
+  const isProcessing = data.status === "processing"
+  const isUpcoming = data.status === "upcoming"
+  const isCompleted = data.status === "completed"
+  const isCancelled = data.status === "cancelled"
+
+
   return (
     <>
       <RemoveConfirmation />
@@ -60,7 +71,11 @@ export const MeetingIdView = ({ meetingId }: Props) => {
           onEdit={() => setUpdateMeetingDialogOpen(true)}
           onRemove={handleRemoveMeeting}
         />
-        {JSON.stringify(data, null, 2)}
+        {isCancelled && <CancelledState />}
+        {isCompleted && <div>Completed</div>}
+        {isUpcoming && <UpcomingState meetingId={meetingId} onCancelMeeting={() => { }} isCancelling={false} />}
+        {isProcessing && <ProcessingState />}
+        {isActive && <ActiveState meetingId={meetingId} />}
       </div>
     </>
   )

@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth"
-import { MeetingIdView, MeetingIdViewError, MeetingIdViewLoading } from "@/modules/agents/ui/views/meeting-id-view"
+import { MeetingIdView, MeetingIdViewError, MeetingIdViewLoading } from "@/modules/meetings/ui/views/meeting-id-view"
 import { HydrateClient, prefetch, trpc } from "@/trpc/server"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
